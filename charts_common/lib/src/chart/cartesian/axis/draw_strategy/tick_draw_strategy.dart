@@ -51,6 +51,7 @@ abstract class TickDrawStrategy<D> {
       {@required AxisOrientation orientation,
       @required Rectangle<int> axisBounds,
       @required Rectangle<int> drawAreaBounds,
+      bool drawDashedLine,
       @required bool isFirst,
       @required bool isLast});
 

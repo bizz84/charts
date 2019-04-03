@@ -492,11 +492,14 @@ abstract class Axis<D> extends ImmutableAxis<D> implements LayoutView {
 
     for (var i = 0; i < _axisTicks.length; i++) {
       final animatedTick = _axisTicks[i];
+      // Draw 0.0 line with a dash
+      bool dashed = animatedTick.value == 0.0;
       tickDrawStrategy.draw(
           canvas, animatedTick..setCurrentTick(animationPercent),
           orientation: axisOrientation,
           axisBounds: _componentBounds,
           drawAreaBounds: _drawAreaBounds,
+          drawDashedLine: dashed,
           isFirst: i == 0,
           isLast: i == _axisTicks.length - 1);
     }

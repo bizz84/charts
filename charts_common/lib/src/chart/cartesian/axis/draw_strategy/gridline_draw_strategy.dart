@@ -118,6 +118,7 @@ class GridlineTickDrawStrategy<D> extends BaseTickDrawStrategy<D> {
       {@required AxisOrientation orientation,
       @required Rectangle<int> axisBounds,
       @required Rectangle<int> drawAreaBounds,
+      bool drawDashedLine = false,
       @required bool isFirst,
       @required bool isLast}) {
     Point<num> lineStart;
@@ -158,7 +159,7 @@ class GridlineTickDrawStrategy<D> extends BaseTickDrawStrategy<D> {
 
     canvas.drawLine(
       points: [lineStart, lineEnd],
-      dashPattern: lineStyle.dashPattern,
+      dashPattern: drawDashedLine ? [5] : lineStyle.dashPattern,
       fill: lineStyle.color,
       stroke: lineStyle.color,
       strokeWidthPx: lineStyle.strokeWidth.toDouble(),
