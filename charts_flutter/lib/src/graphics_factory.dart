@@ -19,7 +19,6 @@ import 'package:flutter/widgets.dart' show BuildContext, MediaQuery;
 import 'line_style.dart' show LineStyle;
 import 'text_element.dart' show TextElement;
 import 'text_style.dart' show TextStyle;
-import 'package:charts_flutter/flutter.dart' as charts;
 
 class GraphicsFactory implements common.GraphicsFactory {
   final double textScaleFactor;
@@ -35,9 +34,7 @@ class GraphicsFactory implements common.GraphicsFactory {
   /// Returns a text element from [text] and [style].
   @override
   common.TextElement createTextElement(String text) {
-    var ts = TextStyle();
-    ts.color = charts.MaterialPalette.white;
-    return new TextElement(text, textScaleFactor: textScaleFactor, style: ts);
+    return new TextElement(text, textScaleFactor: textScaleFactor);
   }
 
   @override
