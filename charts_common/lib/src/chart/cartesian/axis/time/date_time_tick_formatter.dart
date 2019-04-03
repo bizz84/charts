@@ -68,8 +68,8 @@ class DateTimeTickFormatter implements TickFormatter<DateTime> {
           noonFormat: 'ha'),
       23 * HOUR: new TimeTickFormatterImpl(
           dateTimeFactory: dateTimeFactory,
-          simpleFormat: 'd',
-          transitionFormat: 'MMM d',
+          simpleFormat: 'd/M',
+          transitionFormat: 'd/M',
           transitionField: CalendarField.month),
       28 * DAY: new TimeTickFormatterImpl(
           dateTimeFactory: dateTimeFactory,
