@@ -20,7 +20,7 @@ import '../../common/date_time_factory.dart'
 import '../cartesian/axis/axis.dart' show Axis, NumericAxis;
 import '../cartesian/axis/draw_strategy/small_tick_draw_strategy.dart'
     show SmallTickRendererSpec;
-import '../cartesian/axis/spec/axis_spec.dart' show AxisSpec;
+import '../cartesian/axis/spec/axis_spec.dart' show AxisSpec, TextStyleSpec;
 import '../cartesian/axis/spec/date_time_axis_spec.dart' show DateTimeAxisSpec;
 import '../cartesian/axis/time/date_time_axis.dart' show DateTimeAxis;
 import '../cartesian/cartesian_chart.dart' show CartesianChart;
@@ -48,7 +48,7 @@ class TimeSeriesChart extends CartesianChart<DateTime> {
 
   @override
   void initDomainAxis() {
-    domainAxis.tickDrawStrategy = new SmallTickRendererSpec<DateTime>()
+    domainAxis.tickDrawStrategy = new SmallTickRendererSpec<DateTime>(labelStyle: TextStyleSpec(fontSize: 14))
         .createDrawStrategy(context, graphicsFactory);
   }
 
