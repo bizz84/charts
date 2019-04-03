@@ -75,7 +75,7 @@ class NumericTickFormatter extends SimpleTickFormatterBase<num> {
   /// [formatter] optionally specify a formatter to be used. Defaults to using
   /// [NumberFormat.decimalPattern] if none is specified.
   factory NumericTickFormatter({MeasureFormatter formatter}) {
-    formatter ??= _getFormatter(new NumberFormat.decimalPattern());
+    formatter ??= _getFormatter(new NumberFormat.simpleCurrency(decimalDigits: 0));
     return new NumericTickFormatter._internal(formatter);
   }
 
