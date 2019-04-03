@@ -43,7 +43,7 @@ import 'axis/draw_strategy/gridline_draw_strategy.dart'
 import 'axis/draw_strategy/none_draw_strategy.dart' show NoneDrawStrategy;
 import 'axis/draw_strategy/small_tick_draw_strategy.dart'
     show SmallTickRendererSpec;
-import 'axis/spec/axis_spec.dart' show AxisSpec;
+import 'axis/spec/axis_spec.dart' show AxisSpec, TextStyleSpec;
 
 class NumericCartesianChart extends CartesianChart<num> {
   NumericCartesianChart(
@@ -166,7 +166,7 @@ abstract class CartesianChart<D> extends BaseChart<D> {
     super.init(context, graphicsFactory);
 
     _primaryMeasureAxis.context = context;
-    _primaryMeasureAxis.tickDrawStrategy = new GridlineRendererSpec<num>()
+    _primaryMeasureAxis.tickDrawStrategy = new GridlineRendererSpec<num>(labelStyle: TextStyleSpec(fontSize: 14))
         .createDrawStrategy(context, graphicsFactory);
 
     _secondaryMeasureAxis.context = context;
