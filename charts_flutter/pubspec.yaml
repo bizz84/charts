@@ -16,8 +16,9 @@ dependencies:
   # charts_common: 0.6.0
   charts_common:
     git:
-      url: https://gitlab.com/r2-technology/mymuse/charts_flutter
+      url: https://github.com/bizz84/charts
       path: charts_common
+      ref: custom
   collection: ^1.14.5
   flutter:
     sdk: flutter
