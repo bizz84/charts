@@ -513,7 +513,7 @@ class NumericTickProvider extends BaseTickProvider<num> {
     // If the domain range contains both positive and negative values, then we
     // need a minimum of three ticks to include zero as a tick. Otherwise, we
     // only need an upper and lower tick.
-    final absoluteMinTicks = (low < 0 && 0 < high) ? 3 : 2;
+    final absoluteMinTicks = (low < 0 && 0 < high) ? 5 : 4;
 
     // If there is a desired tick range use it, if not calculate one.
     if (_desiredMaxTickCount != null) {
