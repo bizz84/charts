@@ -14,6 +14,8 @@
 // limitations under the License.
 
 import 'dart:math' show Point, Rectangle;
+import 'dart:ui' as ui;
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:charts_common/common.dart' as common show Color;
 
@@ -68,17 +70,6 @@ class PolygonPainter {
       paint.style = PaintingStyle.fill;
       canvas.drawCircle(new Offset(point.x, point.y), strokeWidthPx, paint);
     } else {
-      if (strokeColor != null && strokeWidthPx != null) {
-        paint.strokeWidth = strokeWidthPx;
-        paint.strokeJoin = StrokeJoin.bevel;
-        paint.style = PaintingStyle.stroke;
-      }
-
-      if (fillColor != null) {
-        paint.color = fillColor;
-        paint.style = PaintingStyle.fill;
-      }
-
       final path = new Path()
         ..moveTo(points.first.x.toDouble(), points.first.y.toDouble());
 
@@ -86,11 +77,49 @@ class PolygonPainter {
         path.lineTo(point.x.toDouble(), point.y.toDouble());
       }
 
-      canvas.drawPath(path, paint);
-    }
+      if (fillColor != null) {
+        final allPositive = _allPointsAboveFirst(points);
+        // First, draw fill
+        if (allPositive) {
+          final double top = points.fold(0.0, (prev, value) => min(prev, value.y));
+          final double bottom = points.fold(top, (prev, value) => max(prev, value.y));
+          paint.shader = ui.Gradient.linear(
+              Offset(0.0, top),
+              Offset(0.0, bottom),
+              [
+                fillColor.withOpacity(0.375),
+                fillColor.withOpacity(0.125),
+              ]);
+          paint.style = PaintingStyle.fill;
 
-    if (clipBounds != null) {
-      canvas.restore();
+          canvas.drawPath(path, paint);
+        } else {
+          paint.color = fillColor.withOpacity(0.25);
+          paint.style = PaintingStyle.fill;
+          canvas.drawPath(path, paint);
+        }
+
+        // Then, draw stroke
+        paint.shader = null;
+        paint.color = fillColor;
+        paint.strokeWidth = 2;
+        paint.strokeJoin = StrokeJoin.bevel;
+        paint.style = PaintingStyle.stroke;
+        canvas.drawPath(path, paint);
+      }
+      if (clipBounds != null) {
+        canvas.restore();
+      }
     }
+  }
+
+  bool _allPointsAboveFirst(List<Point> points) {
+    final firstY = points.first.y;
+    for (var point in points) {
+      if (point.y > firstY) {
+        return false;
+      }
+    }
+    return true;
   }
 }
